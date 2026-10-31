@@ -7,3 +7,4 @@ repo doubles as a trail to revisit concepts later.
 ## Index
 
 - [`notes/01-intro-prisoners-dilemma.md`](notes/01-intro-prisoners-dilemma.md) — what a game is (players/strategies/payoffs), Prisoner's Dilemma
+- [`notes/02-nash-equilibrium-battle-of-sexes.md`](notes/02-nash-equilibrium-battle-of-sexes.md) — Nash Equilibrium, Battle of the Sexes, multiple equilibria & coordination problems
