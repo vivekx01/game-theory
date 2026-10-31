@@ -20,3 +20,4 @@ repo doubles as a trail to revisit concepts later.
 - [`notes/05-sequential-games-credible-threats.md`](notes/05-sequential-games-credible-threats.md) — sequential games, empty vs. credible threats, subgame perfect equilibrium, commitment devices
 - [`notes/06-asymmetric-information-signaling.md`](notes/06-asymmetric-information-signaling.md) — Market for Lemons, adverse selection, costly signaling, why education/warranties/credentials work
 - [`notes/07-auctions-mechanism-design.md`](notes/07-auctions-mechanism-design.md) — first-price vs. second-price auctions, why truthful bidding is dominant, designing rules so self-interest produces honesty
+- [`notes/08-evolutionary-game-theory-hawk-dove.md`](notes/08-evolutionary-game-theory-hawk-dove.md) — Hawk-Dove game, evolutionarily stable strategies, why mixes of aggressive/accommodating types persist without anyone reasoning about it
