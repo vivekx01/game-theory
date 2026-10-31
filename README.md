@@ -4,6 +4,12 @@ Personal notes from ongoing discussions/brainstorming on game theory. Each sessi
 takeaways get written up as a dated, numbered markdown file in `notes/`, so this
 repo doubles as a trail to revisit concepts later.
 
+## How to actually retain this
+
+- [`cheatsheet.md`](cheatsheet.md) — one-page summary with a trigger question per concept; skim before a real decision/negotiation
+- [`notes/real-life-log.md`](notes/real-life-log.md) — log it here whenever you spot a concept playing out in real life
+- Each new session starts with a quick recall quiz on 1-2 past concepts before introducing anything new
+
 ## Index
 
 - [`notes/01-intro-prisoners-dilemma.md`](notes/01-intro-prisoners-dilemma.md) — what a game is (players/strategies/payoffs), Prisoner's Dilemma
