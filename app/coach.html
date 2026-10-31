@@ -1,0 +1,363 @@
+<title>Game Theory Coach</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/*
+  Layout: full-height mobile chat — header, scrolling thread, composer,
+  all normal flex flow (no fixed/sticky) so safe-area insets from the
+  page skeleton's :root padding apply automatically top and bottom.
+*/
+:root{
+  --bg:#F1F2F5; --surface:#FFFFFF; --fg:#1C2029; --muted:#667085;
+  --accent:#1F6F5C; --accent-warm:#B8863A; --on-warm:#1C2029;
+  --border:rgba(28,32,41,0.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11141B; --surface:#1B2029; --fg:#E7E9ED; --muted:#9AA3B2;
+    --accent:#3FA68C; --accent-warm:#D9A94C; --on-warm:#1C2029;
+    --border:rgba(231,233,237,0.12);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11141B; --surface:#1B2029; --fg:#E7E9ED; --muted:#9AA3B2;
+  --accent:#3FA68C; --accent-warm:#D9A94C; --on-warm:#1C2029;
+  --border:rgba(231,233,237,0.12);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:"Source Sans 3",system-ui,-apple-system,sans-serif}
+
+.app{display:flex;flex-direction:column;height:100%;min-height:100%}
+
+.sidepad{padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+
+.header{border-bottom:1px solid var(--border);flex:0 0 auto}
+.header-inner{padding-block:14px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-width:0}
+.header h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.15rem;margin:0;letter-spacing:-0.01em}
+.header p{margin:2px 0 0;font-size:0.78rem;color:var(--muted)}
+.header-title{min-width:0}
+#resetBtn{flex:0 0 auto;background:none;border:1px solid var(--border);color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:0.03em;text-transform:uppercase;padding:7px 11px;border-radius:999px;cursor:pointer}
+#resetBtn:active{background:var(--border)}
+
+.thread{flex:1 1 auto;overflow-y:auto;padding-block:16px;display:flex;flex-direction:column;gap:12px}
+
+.empty{display:flex;flex-direction:column;gap:14px;padding-block:8px}
+.empty-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
+.empty-card p{margin:0 0 8px;font-size:0.92rem;line-height:1.5}
+.empty-card p:last-child{margin-bottom:0}
+.chips{display:flex;flex-direction:column;gap:8px}
+.chip{text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:0.88rem;color:var(--fg);cursor:pointer;line-height:1.35}
+.chip:active{border-color:var(--accent)}
+.chip b{color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:0.02em;display:block;margin-bottom:3px;text-transform:uppercase}
+
+.row{display:flex;min-width:0}
+.row.user{justify-content:flex-end}
+.row.assistant{justify-content:flex-start}
+
+.bubble{max-width:85%;min-width:0;border-radius:14px;padding:10px 13px;font-size:0.92rem;line-height:1.5;overflow-wrap:break-word}
+.bubble p{margin:0 0 8px}
+.bubble p:last-child{margin-bottom:0}
+.bubble ul{margin:6px 0 8px;padding-left:1.1em}
+.bubble li{margin-bottom:3px}
+.row.assistant .bubble{background:var(--surface);border:1px solid var(--border);color:var(--fg);border-bottom-left-radius:4px}
+.row.user .bubble{background:var(--accent-warm);color:var(--on-warm);border-bottom-right-radius:4px}
+
+.row.pending .bubble{color:var(--muted)}
+.dots::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted);margin-left:2px;animation:pulse 1.1s infinite}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+
+.notice{font-size:0.82rem;color:var(--muted);text-align:center;padding:8px 0}
+
+.composer{flex:0 0 auto;border-top:1px solid var(--border);padding-block:10px;display:flex;gap:8px;align-items:flex-end}
+#input{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:var(--surface);color:var(--fg);border:1px solid var(--border);border-radius:14px;padding:10px 12px;font-size:0.92rem;font-family:inherit;line-height:1.4}
+#input:focus{outline:2px solid var(--accent);outline-offset:1px}
+#sendBtn{flex:0 0 auto;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:0 16px;font-size:0.88rem;font-weight:600;cursor:pointer;height:42px}
+#sendBtn:disabled{opacity:0.5}
+</style>
+
+<div class="app">
+  <div class="header sidepad">
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Game Theory Coach</h1>
+        <p>Pressure-test real decisions against what we've covered</p>
+      </div>
+      <button id="resetBtn" type="button">New</button>
+    </div>
+  </div>
+
+  <div class="thread sidepad" id="thread">
+    <div class="empty" id="emptyState">
+      <div class="empty-card">
+        <p>Describe a real or hypothetical situation and I'll walk it through the decision framework with you — or ask me to quiz you on what we've covered so far.</p>
+        <p>I only know what's in our notes: dominant strategies, Nash Equilibrium, mixed strategies, repeated games, credible threats, and signaling.</p>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip" type="button" data-prompt="I want to pressure-test a real situation I'm in. Ask me what's going on.">
+          <b>Pressure-test</b>Walk through a real situation I'm facing
+        </button>
+        <button class="chip" type="button" data-prompt="Quiz me on the concepts we've covered so far. Ask one question at a time and give me feedback before moving on.">
+          <b>Quiz me</b>Test what I actually remember
+        </button>
+        <button class="chip" type="button" data-prompt="Walk me through the decision framework (What Game Am I Actually In?) step by step on a situation I'll describe.">
+          <b>Framework</b>Run the step-by-step decision framework
+        </button>
+        <button class="chip" type="button" data-prompt="Re-explain one of the six concepts to me in plain language — ask me which one first.">
+          <b>Re-explain</b>Go back over a concept, plainly
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <form class="composer sidepad" id="composer">
+    <textarea id="input" rows="1" placeholder="Describe a scenario, or ask a question…"></textarea>
+    <button id="sendBtn" type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "gtc_messages_v1";
+  var samplePromise = (window.claude && window.claude.use) ? window.claude.use("sample") : Promise.resolve(null);
+
+  var SYSTEM_PREAMBLE = [
+"You are the user's personal game theory coach and sounding board, continuing a tutoring conversation that already covered six concepts, taught in plain, real-life language rather than textbook jargon. Stay in that voice: concrete, direct, no jargon unless you immediately translate it.",
+"",
+"THE SIX CONCEPTS:",
+"1. Dominant strategy / Prisoner's Dilemma — individually rational choices can trap a whole group in a worse collective outcome, purely from lack of trust. Fix: change the incentives, don't just ask people to be nicer.",
+"2. Nash Equilibrium / Battle of the Sexes — a stable point where nobody wants to switch alone, given what others are doing. Not necessarily good, just stuck. Some games have multiple equilibria — then the real problem is coordination, not logic.",
+"3. Mixed strategies / Matching Pennies — in pure zero-sum conflict with no stable fixed plan, being predictable gets you exploited. The fix is deliberate, calculated unpredictability, not a 'better' fixed move.",
+"4. Repeated games / shadow of the future — cooperation becomes rational once you expect to deal with someone again, because the future cost of broken trust outweighs today's one-time gain from cheating. How forgiving to be (Tit-for-Tat vs. Grim Trigger) depends on whether the betrayal was clear and provable, or ambiguous/could be a mistake.",
+"5. Sequential games / credible threats — a threat only matters if following through is genuinely in the threatener's own interest once the moment of truth arrives; otherwise it's empty and should be called out. To make your own threat credible, you need a commitment device (something that makes backing out costly for you).",
+"6. Asymmetric information / signaling — cheap claims ('cheap talk') are worthless since anyone can say them for free. Only a costly signal that is specifically cheaper for the genuinely good type to produce is believable.",
+"",
+"THE DECISION FRAMEWORK ('What Game Am I Actually In?'):",
+"0. Pause before reacting — strong emotion is the only trigger that needs to fire automatically.",
+"1. Is this one-time or repeated with this person? (Shadow of the future present or not?)",
+"2. Does my best move change depending on what they do? If no (one move always wins) — likely a trust/incentive trap, look at concept 1. If yes, continue.",
+"3. Do we actually want the same outcome, just disagree on path (coordination, concept 2) or is it genuinely adversarial (concept 3)?",
+"4. Is there a threat or promise on the table? Check if it's credible (concept 5).",
+"5. If trust/betrayal is the issue: is it clear and provable, or ambiguous/could be a mistake? Calibrate forgiveness accordingly (concept 4).",
+"6. Am I being asked to just trust someone's word, or is there an actual costly signal (concept 6)?",
+"",
+"YOUR JOB: pressure-test real or hypothetical scenarios the user brings, and build their intuition over time. When they describe a situation: ask brief clarifying questions only if truly necessary, explicitly name which framework step(s) and concept(s) apply and why, and end with a clear, concrete recommendation — not just a lecture. When asked to quiz them, ask one question at a time and give direct feedback on their answer (including telling them if they're wrong) before moving to the next. Keep responses SHORT and scannable — this is a mobile chat interface, so prefer short paragraphs and occasional bullet points over long essays; a wall of text is a failure here. Be willing to disagree or push back if their reasoning has a real gap, like a good sparring partner would, rather than just validating everything."
+  ].join("\n");
+
+  var thread = document.getElementById("thread");
+  var emptyState = document.getElementById("emptyState");
+  var composer = document.getElementById("composer");
+  var input = document.getElementById("input");
+  var sendBtn = document.getElementById("sendBtn");
+  var resetBtn = document.getElementById("resetBtn");
+  var chips = document.getElementById("chips");
+
+  var messages = loadMessages();
+  var sampleFn = null;
+  var sampleReady = false;
+  var resetArmed = false;
+  var resetTimer = null;
+
+  samplePromise.then(function(fn){ sampleFn = fn; sampleReady = true; if(!fn){ showNotice("AI chat isn't available in this view."); setComposerEnabled(false); } });
+
+  function loadMessages(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return [];
+      var parsed = JSON.parse(raw);
+      if(Array.isArray(parsed)) return parsed;
+      return [];
+    }catch(e){ return []; }
+  }
+
+  function saveMessages(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(messages)); }catch(e){}
+  }
+
+  function escapeHtml(s){
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function formatMessage(text){
+    var escaped = escapeHtml(text);
+    var lines = escaped.split("\n");
+    var html = "";
+    var inList = false;
+    var paraBuf = [];
+
+    function flushPara(){
+      if(paraBuf.length){ html += "<p>" + paraBuf.join("<br>") + "</p>"; paraBuf = []; }
+    }
+
+    lines.forEach(function(line){
+      var trimmed = line.trim();
+      var isBullet = /^[-*]\s+/.test(trimmed);
+      if(isBullet){
+        flushPara();
+        if(!inList){ html += "<ul>"; inList = true; }
+        html += "<li>" + trimmed.replace(/^[-*]\s+/,"") + "</li>";
+      } else {
+        if(inList){ html += "</ul>"; inList = false; }
+        if(trimmed === ""){ flushPara(); }
+        else { paraBuf.push(line); }
+      }
+    });
+    if(inList) html += "</ul>";
+    flushPara();
+
+    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    return html || "<p></p>";
+  }
+
+  function scrollToBottom(){
+    thread.scrollTop = thread.scrollHeight;
+  }
+
+  function renderAll(){
+    emptyState.hidden = messages.length > 0;
+    Array.prototype.slice.call(thread.querySelectorAll(".row")).forEach(function(el){ el.remove(); });
+    messages.forEach(function(m){ appendRow(m.role, m.content, false); });
+    scrollToBottom();
+  }
+
+  function appendRow(role, content, pending){
+    var row = document.createElement("div");
+    row.className = "row " + role + (pending ? " pending" : "");
+    var bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.innerHTML = pending ? '<span class="dots">Thinking</span>' : formatMessage(content);
+    row.appendChild(bubble);
+    thread.appendChild(row);
+    return row;
+  }
+
+  function showNotice(text){
+    var n = document.createElement("div");
+    n.className = "notice";
+    n.textContent = text;
+    thread.appendChild(n);
+    scrollToBottom();
+  }
+
+  function setComposerEnabled(enabled){
+    input.disabled = !enabled;
+    sendBtn.disabled = !enabled;
+  }
+
+  function autoGrow(){
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 120) + "px";
+  }
+  input.addEventListener("input", autoGrow);
+
+  function buildApiInput(){
+    var apiMsgs = [
+      { role: "user", content: SYSTEM_PREAMBLE },
+      { role: "assistant", content: "Got it — I'm ready. Describe a situation, or tell me what you want to do." }
+    ];
+    messages.forEach(function(m){ apiMsgs.push({ role: m.role, content: m.content }); });
+    return apiMsgs;
+  }
+
+  async function sendMessage(text){
+    text = text.trim();
+    if(!text) return;
+
+    emptyState.hidden = true;
+    messages.push({ role: "user", content: text });
+    saveMessages();
+    appendRow("user", text, false);
+    scrollToBottom();
+
+    input.value = "";
+    autoGrow();
+    setComposerEnabled(false);
+
+    var pendingRow = appendRow("assistant", "", true);
+    scrollToBottom();
+
+    try{
+      if(!sampleReady){
+        sampleFn = await samplePromise;
+        sampleReady = true;
+      }
+      if(!sampleFn){
+        pendingRow.remove();
+        showNotice("AI chat isn't available in this view.");
+        return;
+      }
+
+      var apiInput = buildApiInput();
+      var bubble = pendingRow.querySelector(".bubble");
+      var started = false;
+
+      var result = await sampleFn(apiInput, {
+        onText: function(evt){
+          if(!started){ pendingRow.classList.remove("pending"); started = true; }
+          bubble.innerHTML = formatMessage(evt.text || "");
+          scrollToBottom();
+        }
+      });
+
+      var finalText = (result && result.text) ? result.text : "";
+      pendingRow.classList.remove("pending");
+      bubble.innerHTML = formatMessage(finalText);
+      messages.push({ role: "assistant", content: finalText });
+      saveMessages();
+      scrollToBottom();
+    }catch(err){
+      pendingRow.remove();
+      var code = err && err.code;
+      if(code === "not_granted"){
+        showNotice("AI chat access wasn't granted for this page.");
+      }else if(code === "rate_limited"){
+        showNotice("Hit a rate limit — wait a moment and try again.");
+      }else{
+        showNotice("Something went wrong sending that. Try again.");
+      }
+    }finally{
+      setComposerEnabled(true);
+      input.focus();
+    }
+  }
+
+  composer.addEventListener("submit", function(e){
+    e.preventDefault();
+    sendMessage(input.value);
+  });
+
+  input.addEventListener("keydown", function(e){
+    if(e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      sendMessage(input.value);
+    }
+  });
+
+  chips.addEventListener("click", function(e){
+    var btn = e.target.closest(".chip");
+    if(!btn) return;
+    sendMessage(btn.getAttribute("data-prompt"));
+  });
+
+  resetBtn.addEventListener("click", function(){
+    if(!resetArmed){
+      resetArmed = true;
+      resetBtn.textContent = "Tap again";
+      resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = "New"; }, 3000);
+      return;
+    }
+    clearTimeout(resetTimer);
+    resetArmed = false;
+    resetBtn.textContent = "New";
+    messages = [];
+    saveMessages();
+    renderAll();
+  });
+
+  renderAll();
+})();
+</script>

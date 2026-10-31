@@ -6,6 +6,7 @@ repo doubles as a trail to revisit concepts later.
 
 ## How to actually retain and use this
 
+- **[Game Theory Coach](https://claude.ai/artifact/2y7zFbCUFDzCMaVk1SZSLR)** — mobile chat app (source: `app/coach.html`) that pressure-tests real scenarios live against the notes below
 - [`decision-framework.md`](decision-framework.md) — step-by-step protocol to run through on any real tense situation; start here when you're actually stuck on a decision
 - [`cheatsheet.md`](cheatsheet.md) — one-page summary with a trigger question per concept; skim before a real decision/negotiation
 - [`notes/real-life-log.md`](notes/real-life-log.md) — log it here whenever you spot a concept playing out in real life
