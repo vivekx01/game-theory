@@ -1,56 +1,71 @@
-# 01 — Intro to Game Theory & the Prisoner's Dilemma
+# 01 — Game Theory 101 & the Prisoner's Dilemma
 
-## What is game theory?
+## What is game theory, really?
 
-The study of strategic decision-making: situations where the best choice for a
-player depends on what *other* players choose, not just on their own
-preferences in isolation. This is what separates it from ordinary
-optimization/decision theory.
+It's the study of situations where what's smart for you depends on what
+other people do — not just your own preferences in isolation. Any time
+you're thinking "I'd do X... but only if they don't do Y," you're already
+thinking in game theory terms.
 
-Every game has three ingredients:
+Every one of these situations breaks down into three things:
 
-1. **Players** — the decision-makers
-2. **Strategies** — the set of choices available to each player
-3. **Payoffs** — the outcome each player receives for every combination of
-   choices made by all players
+1. **Players** — who's choosing
+2. **Strategies** — what each person can choose
+3. **Payoffs** — what each person gets, for every combination of choices
 
 ## The Prisoner's Dilemma
 
-Two suspects, A and B, are interrogated separately (no communication). Each
-chooses to **stay silent** or **betray** the other. Payoffs are years in
-prison (lower is better):
+Two suspects get caught and interrogated in separate rooms (no talking to
+each other). Each one can **stay silent** or **betray** the other.
+Outcome, in years of prison (lower is better):
 
 |                     | B stays silent | B betrays   |
 |---------------------|-----------------|-------------|
 | **A stays silent**  | A: 1, B: 1      | A: 3, B: 0  |
 | **A betrays**       | A: 0, B: 3      | A: 2, B: 2  |
 
-### Reasoning through it
+### Why "betray" wins, logically
 
-Check A's best move in each possible case for B:
+Put yourself in A's seat. You don't know what B will do, so check both
+possibilities:
 
-- If B stays silent → A betraying (0) beats A staying silent (1)
-- If B betrays → A betraying (2) beats A staying silent (3)
+- If B stays silent → betraying gets you 0 years instead of 1. Betray wins.
+- If B betrays → betraying gets you 2 years instead of 3. Betray wins.
 
-Betray is better for A **regardless of what B does**. This is a **dominant
-strategy**: a choice that is at least as good as the alternative no matter
-what the other player does — no need to predict or guess the opponent's move.
+Betraying is better **no matter what B does**. You don't even need to guess
+B's move — betray always wins for you. That's called a **dominant
+strategy**.
 
-By symmetry, B reasons the same way. Both players rationally betray, landing
-on **(betray, betray) → 2 years each**.
+Since B is thinking the same way, both betray. Result: **2 years each.**
 
-### The dilemma
+### The actual dilemma
 
-If both had stayed silent, each would only get **1 year** — strictly better
-for both than the (betray, betray) outcome. But neither can risk unilaterally
-staying silent, since that risks the worst individual outcome (3 years) if
-the other betrays.
+If they'd both just stayed silent, they'd each only get **1 year** — better
+for both! But nobody can risk it, because trusting the other guy and getting
+betrayed is the worst possible outcome (3 years). So both play it "safe" and
+both end up worse off than if they'd cooperated.
 
-**Key insight:** individually rational choices can lead to a collectively
-worse outcome. Self-interest doesn't guarantee group-optimal results.
+**This is the real lesson:** everyone acting in their own rational
+self-interest can land the whole group in a worse spot than if they'd
+cooperated — purely because nobody can trust the other side not to defect.
+
+### Where this shows up in real life
+
+- Two competing stores cutting prices into a price war neither one wanted
+- Roommates not cleaning up, each hoping someone else does it first
+- Countries stockpiling weapons when everyone would prefer disarmament
+- Companies dumping environmental costs onto everyone else instead of eating
+  the cleanup cost themselves
+- Any "tragedy of the commons" — overfishing, traffic, shared office fridge
+
+**How to use this:** when you spot a group making a collectively dumb
+decision, ask — is this actually a trust problem, not a stupidity problem?
+If so, the fix usually isn't "convince people to be nicer" — it's changing
+the incentives (contracts, reputation, repeated interactions, regulation) so
+that cooperating becomes the *individually* smart move too.
 
 ### Preview: Nash Equilibrium
 
-(betray, betray) is also a **Nash Equilibrium** — a state where no player can
-improve their own payoff by unilaterally switching strategy, given what the
-other player is doing. We'll formalize this next.
+(betray, betray) is also an example of a **Nash Equilibrium** — a state
+where neither player wants to change their own move, given what the other
+is doing. More on this next.
