@@ -19,3 +19,4 @@ repo doubles as a trail to revisit concepts later.
 - [`notes/04-repeated-games-shadow-of-the-future.md`](notes/04-repeated-games-shadow-of-the-future.md) — repeated Prisoner's Dilemma, backward induction, shadow of the future, Tit-for-Tat vs. Grim Trigger and when to use which
 - [`notes/05-sequential-games-credible-threats.md`](notes/05-sequential-games-credible-threats.md) — sequential games, empty vs. credible threats, subgame perfect equilibrium, commitment devices
 - [`notes/06-asymmetric-information-signaling.md`](notes/06-asymmetric-information-signaling.md) — Market for Lemons, adverse selection, costly signaling, why education/warranties/credentials work
+- [`notes/07-auctions-mechanism-design.md`](notes/07-auctions-mechanism-design.md) — first-price vs. second-price auctions, why truthful bidding is dominant, designing rules so self-interest produces honesty
