@@ -19,6 +19,7 @@ negotiation, disagreement, or decision — that's the point of it.
 | **Volunteer's Dilemma** | A group all benefits if one person acts, but everyone would rather someone else pay the cost — more witnesses can mean less action, not more. | Is this task sitting on "someone" instead of a named person? Can I remove the ambiguity by assigning it directly? |
 | **Ultimatum Game / fairness** | Real people reject "technically rational" lowball offers just to punish unfairness — fairness is a hard constraint, not a nice-to-have. | Am I anchoring to the bare-minimum-acceptable offer? Would I actually accept this if the roles were reversed? |
 | **Stag Hunt** | Some failed cooperation is about fear/trust, not greed — nobody wants to betray anyone, they're just unsure the other will show up. | Is anyone actually tempted to cheat here, or is this just uncertainty? If it's uncertainty, do I need a trust signal, not a rule? |
+| **Common knowledge** | A group can stay silent even when most people secretly agree — private knowledge isn't enough, everyone needs to know everyone else knows too. | Is everyone already privately convinced here? If so, do I need to make it public/visible instead of persuading more people? |
 
 ## Quick reference: notes behind each row
 
@@ -34,3 +35,4 @@ negotiation, disagreement, or decision — that's the point of it.
 10. [Volunteer's Dilemma / bystander effect](notes/10-volunteers-dilemma-bystander-effect.md)
 11. [Ultimatum Game / fairness](notes/11-ultimatum-game-fairness.md)
 12. [Stag Hunt / trust vs. greed](notes/12-stag-hunt-trust-vs-greed.md)
+13. [Common knowledge](notes/13-common-knowledge.md)
