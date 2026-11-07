@@ -21,3 +21,4 @@ repo doubles as a trail to revisit concepts later.
 - [`notes/06-asymmetric-information-signaling.md`](notes/06-asymmetric-information-signaling.md) — Market for Lemons, adverse selection, costly signaling, why education/warranties/credentials work
 - [`notes/07-auctions-mechanism-design.md`](notes/07-auctions-mechanism-design.md) — first-price vs. second-price auctions, why truthful bidding is dominant, designing rules so self-interest produces honesty
 - [`notes/08-evolutionary-game-theory-hawk-dove.md`](notes/08-evolutionary-game-theory-hawk-dove.md) — Hawk-Dove game, evolutionarily stable strategies, why mixes of aggressive/accommodating types persist without anyone reasoning about it
+- [`notes/09-bargaining-theory-batna.md`](notes/09-bargaining-theory-batna.md) — Nash Bargaining Solution, BATNA, why your walk-away option (not your arguing skill) decides negotiation outcomes

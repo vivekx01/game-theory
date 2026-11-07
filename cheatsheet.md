@@ -13,6 +13,9 @@ negotiation, disagreement, or decision — that's the point of it.
 | **Tit-for-Tat vs. Grim Trigger** | How forgiving you should be depends on how *sure* you are it was real betrayal, not a mistake. | Is this clear, provable betrayal (cut ties for good) or an ambiguous/noisy signal (punish but stay open to repair)? |
 | **Credible vs. empty threats** (sequential games) | A threat only matters if following through is actually in the threatener's own interest once the moment arrives. | Would they really prefer to follow through, or are they bluffing? If it's my threat — have I made backing down costly for myself? |
 | **Signaling / adverse selection** | Cheap claims are worthless ("cheap talk") — only costly signals that are *cheaper for the genuine type* are believable. | Am I trusting a free claim I shouldn't? What would actually cost more for a fake version of this to produce? |
+| **Mechanism design** (auctions) | Design the rules so self-interest produces the outcome you want — don't rely on trust or arguing. | Can I pick a rule here that makes the honest/fair move the personally best move for everyone? |
+| **Evolutionary stability** (Hawk-Dove) | A group skewed entirely toward one type (all-aggressive, all-accommodating) always has unclaimed profit for someone to lean the other way. | Is this group/market lopsided toward one style right now? Is there an opening for me to be the opposite? |
+| **Bargaining / BATNA** | The split of any deal is decided by each side's walk-away option, not by who argues better. | Have I actually strengthened my walk-away option before this negotiation — or am I just planning to argue well? |
 
 ## Quick reference: notes behind each row
 
@@ -22,3 +25,6 @@ negotiation, disagreement, or decision — that's the point of it.
 4. [Repeated games / shadow of the future](notes/04-repeated-games-shadow-of-the-future.md)
 5. [Sequential games / credible threats](notes/05-sequential-games-credible-threats.md)
 6. [Asymmetric information / signaling](notes/06-asymmetric-information-signaling.md)
+7. [Auctions / mechanism design](notes/07-auctions-mechanism-design.md)
+8. [Evolutionary game theory / Hawk-Dove](notes/08-evolutionary-game-theory-hawk-dove.md)
+9. [Bargaining theory / BATNA](notes/09-bargaining-theory-batna.md)
