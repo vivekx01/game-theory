@@ -22,3 +22,4 @@ repo doubles as a trail to revisit concepts later.
 - [`notes/08-evolutionary-game-theory-hawk-dove.md`](notes/08-evolutionary-game-theory-hawk-dove.md) — Hawk-Dove game, evolutionarily stable strategies, why mixes of aggressive/accommodating types persist without anyone reasoning about it
 - [`notes/09-bargaining-theory-batna.md`](notes/09-bargaining-theory-batna.md) — Nash Bargaining Solution, BATNA, why your walk-away option (not your arguing skill) decides negotiation outcomes
 - [`notes/10-volunteers-dilemma-bystander-effect.md`](notes/10-volunteers-dilemma-bystander-effect.md) — Volunteer's Dilemma, why larger groups can make everyone less likely to act, and the fix (name a specific person)
+- [`notes/11-ultimatum-game-fairness.md`](notes/11-ultimatum-game-fairness.md) — the Ultimatum Game, why real people reject "rational" lowball offers, and why fairness is a real strategic constraint
