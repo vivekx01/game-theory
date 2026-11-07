@@ -36,6 +36,15 @@ can happen in the 10-60 seconds after the pause, out loud or in your head
   transparency, smaller trial commitment) instead of just hoping people
   act better?
   → see [[01-intro-prisoners-dilemma]]
+
+  **But first check which disease this actually is:** is anyone genuinely
+  tempted to defect for personal gain (greed — a real Prisoner's
+  Dilemma), or would everyone clearly prefer the cooperative outcome and
+  the only issue is not being sure the other will show up (fear/trust —
+  a Stag Hunt)? These need opposite fixes: incentives/enforcement for
+  greed, visible commitment signals for fear. Treating a trust problem
+  like a greed problem (more rules, more punishment) won't fix it.
+  → see [[12-stag-hunt-trust-vs-greed]]
 - **Yes, it depends on them** → go to Step 3.
 
 ## Step 3 — Do we actually want the same thing?

@@ -23,3 +23,4 @@ repo doubles as a trail to revisit concepts later.
 - [`notes/09-bargaining-theory-batna.md`](notes/09-bargaining-theory-batna.md) — Nash Bargaining Solution, BATNA, why your walk-away option (not your arguing skill) decides negotiation outcomes
 - [`notes/10-volunteers-dilemma-bystander-effect.md`](notes/10-volunteers-dilemma-bystander-effect.md) — Volunteer's Dilemma, why larger groups can make everyone less likely to act, and the fix (name a specific person)
 - [`notes/11-ultimatum-game-fairness.md`](notes/11-ultimatum-game-fairness.md) — the Ultimatum Game, why real people reject "rational" lowball offers, and why fairness is a real strategic constraint
+- [`notes/12-stag-hunt-trust-vs-greed.md`](notes/12-stag-hunt-trust-vs-greed.md) — the Stag Hunt, why failed cooperation is sometimes about fear/trust rather than greed, and why that needs a different fix
