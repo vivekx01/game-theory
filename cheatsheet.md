@@ -16,6 +16,7 @@ negotiation, disagreement, or decision — that's the point of it.
 | **Mechanism design** (auctions) | Design the rules so self-interest produces the outcome you want — don't rely on trust or arguing. | Can I pick a rule here that makes the honest/fair move the personally best move for everyone? |
 | **Evolutionary stability** (Hawk-Dove) | A group skewed entirely toward one type (all-aggressive, all-accommodating) always has unclaimed profit for someone to lean the other way. | Is this group/market lopsided toward one style right now? Is there an opening for me to be the opposite? |
 | **Bargaining / BATNA** | The split of any deal is decided by each side's walk-away option, not by who argues better. | Have I actually strengthened my walk-away option before this negotiation — or am I just planning to argue well? |
+| **Volunteer's Dilemma** | A group all benefits if one person acts, but everyone would rather someone else pay the cost — more witnesses can mean less action, not more. | Is this task sitting on "someone" instead of a named person? Can I remove the ambiguity by assigning it directly? |
 
 ## Quick reference: notes behind each row
 
@@ -28,3 +29,4 @@ negotiation, disagreement, or decision — that's the point of it.
 7. [Auctions / mechanism design](notes/07-auctions-mechanism-design.md)
 8. [Evolutionary game theory / Hawk-Dove](notes/08-evolutionary-game-theory-hawk-dove.md)
 9. [Bargaining theory / BATNA](notes/09-bargaining-theory-batna.md)
+10. [Volunteer's Dilemma / bystander effect](notes/10-volunteers-dilemma-bystander-effect.md)

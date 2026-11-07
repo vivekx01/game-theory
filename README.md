@@ -21,3 +21,4 @@ repo doubles as a trail to revisit concepts later.
 - [`notes/07-auctions-mechanism-design.md`](notes/07-auctions-mechanism-design.md) — first-price vs. second-price auctions, why truthful bidding is dominant, designing rules so self-interest produces honesty
 - [`notes/08-evolutionary-game-theory-hawk-dove.md`](notes/08-evolutionary-game-theory-hawk-dove.md) — Hawk-Dove game, evolutionarily stable strategies, why mixes of aggressive/accommodating types persist without anyone reasoning about it
 - [`notes/09-bargaining-theory-batna.md`](notes/09-bargaining-theory-batna.md) — Nash Bargaining Solution, BATNA, why your walk-away option (not your arguing skill) decides negotiation outcomes
+- [`notes/10-volunteers-dilemma-bystander-effect.md`](notes/10-volunteers-dilemma-bystander-effect.md) — Volunteer's Dilemma, why larger groups can make everyone less likely to act, and the fix (name a specific person)
