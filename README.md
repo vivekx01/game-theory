@@ -8,7 +8,6 @@ repo doubles as a trail to revisit concepts later.
 
 - [`decision-framework.md`](decision-framework.md) — step-by-step protocol to run through on any real tense situation; start here when you're actually stuck on a decision
 - [`cheatsheet.md`](cheatsheet.md) — one-page summary with a trigger question per concept; skim before a real decision/negotiation
-- [`notes/real-life-log.md`](notes/real-life-log.md) — log it here whenever you spot a concept playing out in real life
 - Each new session starts with a quick recall quiz on 1-2 past concepts before introducing anything new
 
 ## Index
